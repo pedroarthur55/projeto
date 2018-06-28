@@ -1,17 +1,35 @@
-<div class="container">
-  <h1>Detalha multa</h1>
-  <dl class="list">
-    <dt>MOtivo</dt>
-    <dd>{{ multa.motivo }}</dd>
-    <dt>descriçao</dt>
-    <dd>{{ multa.Descricao }}</dd>
-    <dt>Data</dt>
-    <dd>{{ multa.valores }}</dd>
-  </dl>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <a [routerLink]="['/alterar-multa', multa._id]" class="btn btn-success">EDITAR</a>
-    <button class="btn btn-danger" type="button" (click)="deleteBook(multa._id)">EXCLUIR</button>
-  </div>
-</div>
+<div class="container">        
+  <div class="row">      
+      <div class="col-md-12">
+          <form  #multaForm="ngForm">
+                  <p-messages [(value)]="msgs"></p-messages>
+              <div class="form-group">
+                  <h3>Motivo</h3>
+                  <span class="ui-float-label">
+                      <input id="float-input" type="text" [disabled]="true" class="form-control"
+                       [(ngModel)]="multa.motivo" name="motivo" size="30" maxlength="40" pInputText>
+                  </span>
+              </div>              
+              
+
+              <div>
+                <h3>Descriçao</h3>
+                <span class="ui-float-label">
+                    <input id="float-input" type="text" [disabled]="true" class="form-control"
+                     [(ngModel)]="multa.descricao" name="descricao" size="30" maxlength="40" pInputText>
+                </span>                       
+                      
+              </div>
+              
+              <div>
+                      <h3>valores</h3>                      
+                      <textarea class="form-control" [(ngModel)]="multa.valores" name="valores" [disabled]="true" required [rows]="5" [cols]="30" maxlength="350" pInputTextarea autoResize="autoResize"></textarea>
+              </div>
+
+            <div class="form-group">             
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    

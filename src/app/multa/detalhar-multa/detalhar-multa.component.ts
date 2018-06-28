@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
@@ -9,26 +9,19 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DetalharMultaComponent implements OnInit {
 
-  multa = {};
+  @Input() multa;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) { }
 
-  ngOnInit() {
-    this.getBookDetail(this.route.snapshot.params['id']);
+  ngOnInit() {    
   }
-
-  getBookDetail(id) {
-    this.http.get('/multa/'+id).subscribe(data => {
-      this.multa = data;
-    });
-  }
-
-  deleteBook(id) {
-    this.http.delete('/multa/'+id)
+  
+  excluirMulta(id) {
+    this.http.delete('/multa/'+ id)
       .subscribe(res => {
           this.router.navigate(['/listar-multa']);
-        }, (err) => {
-          console.log(err);
+        }, (error) => {
+          console.log(error);
         }
       );
   }

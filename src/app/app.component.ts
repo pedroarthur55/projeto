@@ -26,7 +26,7 @@ export class AppComponent {
                 {label: 'Funcionario',  routerLink:['formulario-funcionario']},
                 {label: 'Lazer' , routerLink:['formulario-lazer']},
                 {label: 'Pauta', routerLink:['listar-pauta']},
-                {label: 'Multa' ,  routerLink:['formulario-multa']},
+                {label: 'Multa' ,  routerLink:['listar-multa']},
               ]
           },
           {

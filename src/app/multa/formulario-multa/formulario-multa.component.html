@@ -1,24 +1,34 @@
-<div class="container">
-  <h1>Multa</h1>
-  <div class="row">
-    <div class="col-md-6">
-      <form (ngSubmit)="salvarLazer()" #lazerForm="ngForm">
-        <div class="form-group">
-          <label for="name">Motivo</label>
-          <input type="text" class="form-control" [(ngModel)]="multa.motivo" name="motivo" required>
+<div class="container">        
+  <div class="row">      
+      <div class="col-md-12">
+          <form (ngSubmit)="salvarMulta()" #multaForm="ngForm">
+                  <p-messages [(value)]="msgs"></p-messages>
+              <div class="form-group">
+                  <h3>Motivo</h3>
+                  <span class="ui-float-label">
+                      <input id="float-input" type="text" class="form-control" 
+                      [(ngModel)]="multa.motivo" name="motivo" maxlength="40" size="30" pInputText>                             
+                  </span>
+              </div>
+
+              <div>
+                <h3>Descriçao</h3>
+                <span class="ui-float-label">
+                    <input id="float-input" type="text" class="form-control" 
+                    [(ngModel)]="multa.descricao" name="descricao" maxlength="40" size="30" pInputText>                             
+                </span>
+              </div>
+              
+              <div>
+                      <h3>valores</h3>
+                      <textarea class="form-control" [(ngModel)]="multa.valores" name="valores" required [rows]="5" [cols]="30" maxlength="350" pInputTextarea autoResize="autoResize"></textarea>
+              </div>
+
+            <div class="form-group">
+              <button type="submit" pButton label="Salvar" [disabled]="!multaForm.form.valid" ></button>                    
+            </div>
+          </form>
         </div>
-        <div class="form-group">
-          <label for="name">Descriçao</label>
-          <input type="text" class="form-control" [(ngModel)]="multa.descricao" name="descricao" required>
-        </div>
-        <div class="form-group">
-          <label for="name">valores</label>
-          <input type="text" class="form-control" [(ngModel)]="multa.valores" name="valores" required>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-success">Salvar</button>
-        </div>
-      </form>
+      </div>
     </div>
-  </div>
-</div>
+    

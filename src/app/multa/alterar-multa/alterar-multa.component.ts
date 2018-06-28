@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MessageService } from 'primeng/components/common/messageservice';
+import { Message } from 'primeng/api';
 
 @Component({
   selector: 'alterar-multa',
@@ -9,30 +11,39 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AlterarMultaComponent implements OnInit {
 
-  multa: any = {};
+  @Input() multa;
+  msgs: Message[] = [];
+  
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute,
+     private messageService: MessageService) { }
 
   ngOnInit() {
-    this.getBook(this.route.snapshot.params['id']);
+    this.buscaMultaId(this.route.snapshot.params['id']);
   }
 
-  getBook(id) {
-    this.http.get('/multa/'+id).subscribe(data => {
-      this.multa = data;
+  buscaMultaId(id) {
+    this.http.get('/multa/'+id).subscribe(multaId => {
+      this.multa = multaId;
     });
   }
 
-  updateBook(id) {
+  atualizarMulta(id) {
     this.multa.updated_date = Date.now();
     this.http.put('/multa/'+id, this.multa)
       .subscribe(res => {
           let id = res['_id'];
-          this.router.navigate(['/listar-multa']);
-        }, (err) => {
-          console.log(err);
+          this.mensagemSucesso();
+        }, (error) => {
+          console.log(error);
         }
       );
   }
+
+  mensagemSucesso() {
+    this.msgs = [];
+        this.msgs.push({severity:'success', summary:'Sucesso:', detail:'Atualização de Multa Realizado com Sucesso.'});
+}
+
 
 }
