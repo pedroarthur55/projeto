@@ -1,24 +1,89 @@
-<div class="container">
-  <h1>Lista lazer
-    <a [routerLink]="['/formulario-lazer']" class="btn btn-default btn-lg">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-    </a>
-  </h1>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Local</th>
-        <th>Descriçao</th>
-        <th>Data</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let lazer of lazers">
-        <td>{{ lazer.Local }}</td>
-        <td>{{ lazer.Descricao }}</td>
-        <td>{{ lazer.Data }}</td>
-        <td><a [routerLink]="['/detalhar-lazer', lazer._id]">Detalhes</a></td>
-      </tr>
-    </tbody>
-  </table>
+<p-messages [(value)]="msgs"></p-messages>
+<p-fieldset legend="Dados Para Consulta Lazer">
+
+    <div class="ui-g-12 ui-md-4" class="left">
+        <h3>Data Inicio</h3>
+        <p-calendar [showIcon]="true" [(ngModel)]="dataInicio" tabindex="0" [disabledDates]="invalidDates" [disabledDays]="[0,6]" readonlyInput="true"></p-calendar>
+    </div>
+
+    <div class="ui-g-12 ui-md-4" class="center">
+        <h3>Data Fim</h3>
+        <p-calendar [showIcon]="true" [(ngModel)]="dataFim" tabindex="0" [disabledDates]="invalidDates" [disabledDays]="[0,6]" readonlyInput="true"></p-calendar>
+    </div>
+
+   
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div>
+  <button pButton type="button" label="Consultar" (click)="buscarListaLazer()" style="float:left"></button>
+  <button pButton type="button" (click)="modalFormularioLazer()"  label="Adicionar Lazer" style="float:right"  class="ui-button-warning"></button>
 </div>
+</p-fieldset>
+<br>
+<br>
+
+<!--Dados de Resposta-->
+
+<p-fieldset legend="Lista de Lazer" > 
+<p-table [value]="listaLazer" *ngIf="listaLazer.length > 0" >
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Local</th>
+            <th>Data e Hora</th>            
+            <th>descriçao</th>
+            <th></th>            
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-lazer>
+        <tr>
+            <td>{{ lazer.local }}</td>
+            <td>{{ lazer.data }}</td>            
+            <td>{{ lazer.descricao }}</td>             
+            <td>
+              <button type="text" (click)="selecionarLazer(lazer); modalDetalharLazer();" pButton icon="pi pi-search"></button>
+              <button type="text" (click)="selecionarLazer(lazer);modalAlterarLazer()" pButton icon="pi pi-refresh"></button>
+              <button type="text" (click)="recebeIdLazer(lazer._id);confirmaExclusaoLazer()" pButton icon="pi pi-times"></button>             
+              
+             </td>
+        </tr>
+    </ng-template>        
+    <p-paginator [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10,20,30]"></p-paginator>
+</p-table>
+
+
+<div *ngIf="listaLazer.length==0">
+    Nenhum registro cadastrado
+</div>
+
+<!-- MODALS-->
+
+<p-dialog header="Cadastro de Lazer"  [(visible)]="formularioLazer" [modal]="true" [responsive]="true" [width]="500" [minWidth]="600" [minY]="600" 
+ [baseZIndex]="10000" [closeOnEscape]="false">
+  <formulario-lazer></formulario-lazer>
+</p-dialog>
+
+
+<p-dialog header="Detalhar Lazer"  [(visible)]="detalharLazer" [modal]="true" [responsive]="true" [width]="500" [minWidth]="600" [minY]="600" 
+ [baseZIndex]="10000">
+  <detalhar-lazer [lazer]="lazer"></detalhar-lazer>
+</p-dialog>
+
+
+
+<p-dialog header="Alterar Lazer"  [(visible)]="alterarLazer" [modal]="true" [responsive]="true" [width]="500" [minWidth]="600" [minY]="600" 
+ [baseZIndex]="10000">
+  <alterar-lazer [lazer]="lazer"></alterar-lazer>
+</p-dialog>
+
+
+<p-confirmDialog header="Exclusão de Lazer" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
+
+
+

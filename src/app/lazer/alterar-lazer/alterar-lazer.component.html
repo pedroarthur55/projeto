@@ -1,24 +1,34 @@
-<div class="container">
-  <h1>Edit Book</h1>
-  <div class="row">
-    <div class="col-md-6">
-      <form (ngSubmit)="updateBook(lazer._id)" #lazerForm="ngForm">
-        <div class="form-group">
-          <label for="name">Local</label>
-          <input type="text" class="form-control" [(ngModel)]="lazer.Local" name="local" required>
+<div class="container">        
+  <div class="row">      
+      <div class="col-md-12">
+          <form (ngSubmit)="atualizarLazer(lazer._id)" #lazerForm="ngForm">
+                  <p-messages [(value)]="msgs"></p-messages>
+              <div class="form-group">
+                  <h3>Local</h3>
+                  <span class="ui-float-label">
+                      <input id="float-input" type="text" class="form-control"
+                       [(ngModel)]="lazer.local" name="local" size="30" maxlength="40" pInputText>                      
+                  </span>
+              </div>
+
+              <div>
+                      <h3>Data e Hora</h3>               
+                      <p-calendar [showIcon]="true" [showTime]="true" [(ngModel)]="myDateObject"  
+                      name="data" required tabindex="0" [disabledDates]="invalidDates" 
+                      [disabledDays]="[0,6]" readonlyInput="true"></p-calendar>                        
+                      
+              </div>
+              
+              <div>
+                      <h3>descricao</h3>
+                      <textarea class="form-control" [(ngModel)]="lazer.descricao" name="descricao" 
+                      required [rows]="5" [cols]="30" maxlength="350" pInputTextarea autoResize="autoResize" ></textarea>
+              </div>
+
+            <div class="form-group">
+              <button type="submit" pButton label="Salvar" [disabled]="!lazerForm.form.valid"></button>                    
+            </div>
+          </form>
         </div>
-        <div class="form-group">
-          <label for="name">Descriçao</label>
-          <input type="text" class="form-control" [(ngModel)]="lazer.Descricao" name="descricao" required>
-        </div>
-        <div class="form-group">
-          <label for="name">DAta</label>
-          <input type="text" class="form-control" [(ngModel)]="lazer.Data" name="data" required>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-success">Update</button>
-        </div>
-      </form>
+      </div>
     </div>
-  </div>
-</div>

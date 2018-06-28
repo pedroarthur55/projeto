@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MessageService } from 'primeng/components/common/messageservice';
+import { Message } from 'primeng/api';
 
 @Component({
   selector: 'alterar-lazer',
@@ -9,30 +11,38 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AlterarLazerComponent implements OnInit {
 
-  lazer: any = {};
+  @Input() lazer;
+  msgs: Message[] = [];
+  
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute,
+     private messageService: MessageService) { }
 
   ngOnInit() {
-    this.getBook(this.route.snapshot.params['id']);
+    this.buscaLazerId(this.route.snapshot.params['id']);
   }
 
-  getBook(id) {
-    this.http.get('/lazer/'+id).subscribe(data => {
-      this.lazer = data;
+  buscaLazerId(id) {
+    this.http.get('/lazer/'+id).subscribe(lazerId => {
+      this.lazer = lazerId;
     });
   }
 
-  updateBook(id) {
+  atualizarLazer(id) {
     this.lazer.updated_date = Date.now();
     this.http.put('/lazer/'+id, this.lazer)
       .subscribe(res => {
           let id = res['_id'];
-          this.router.navigate(['/listar-lazer']);
-        }, (err) => {
-          console.log(err);
+          this.mensagemSucesso();
+        }, (error) => {
+          console.log(error);
         }
       );
   }
+
+  mensagemSucesso() {
+    this.msgs = [];
+        this.msgs.push({severity:'success', summary:'Sucesso:', detail:'Atualização de Lazer Realizado com Sucesso.'});
+}
 
 }

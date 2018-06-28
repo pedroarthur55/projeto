@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
@@ -9,26 +9,19 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DetalharLazerComponent implements OnInit {
 
-  lazer = {};
+  @Input() lazer;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) { }
 
-  ngOnInit() {
-    this.getBookDetail(this.route.snapshot.params['id']);
+  ngOnInit() {    
   }
-
-  getBookDetail(id) {
-    this.http.get('/lazer/'+id).subscribe(data => {
-      this.lazer = data;
-    });
-  }
-
-  deleteBook(id) {
-    this.http.delete('/lazer/'+id)
+  
+  excluirLazer(id) {
+    this.http.delete('/lazer/'+ id)
       .subscribe(res => {
           this.router.navigate(['/listar-lazer']);
-        }, (err) => {
-          console.log(err);
+        }, (error) => {
+          console.log(error);
         }
       );
   }

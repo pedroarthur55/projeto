@@ -1,17 +1,34 @@
-<div class="container">
-  <h1>Detalha lista</h1>
-  <dl class="list">
-    <dt>local</dt>
-    <dd>{{ lazer.Local }}</dd>
-    <dt>descriçao</dt>
-    <dd>{{ lazer.Descricao }}</dd>
-    <dt>Data</dt>
-    <dd>{{ lazer.Data }}</dd>
-  </dl>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <a [routerLink]="['/alterar-lazer', lazer._id]" class="btn btn-success">EDITAR</a>
-    <button class="btn btn-danger" type="button" (click)="deleteBook(lazer._id)">DELETAR</button>
-  </div>
-</div>
+<div class="container">        
+  <div class="row">      
+      <div class="col-md-12">
+          <form  #lazerForm="ngForm">
+                  <p-messages [(value)]="msgs"></p-messages>
+              <div class="form-group">
+                  <h3>Local</h3>
+                  <span class="ui-float-label">
+                      <input id="float-input" type="text" [disabled]="true" class="form-control"
+                       [(ngModel)]="lazer.local" name="local" size="30" maxlength="40" pInputText>
+                  </span>
+              </div>              
+              
+
+              <div>
+                      <h3>Data e Hora</h3>               
+                      <p-calendar [showIcon]="true" [showTime]="true" [(ngModel)]="myDateObject"  
+                      name="data" required tabindex="0" [disabledDates]="invalidDates" 
+                      [disabledDays]="[0,6]" readonlyInput="true"></p-calendar>                        
+                      
+              </div>
+              
+              <div>
+                      <h3>Descricao</h3>                      
+                      <textarea class="form-control" [(ngModel)]="lazer.descricao" name="descricao" [disabled]="true" required [rows]="5" [cols]="30" maxlength="350" pInputTextarea autoResize="autoResize"></textarea>
+              </div>
+
+            <div class="form-group">             
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
