@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>Editar multa</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <form (ngSubmit)="updateBook(multa._id)" #lazerForm="ngForm">
+        <div class="form-group">
+          <label for="name">Motivo</label>
+          <input type="text" class="form-control" [(ngModel)]="multa.motivo" name="motivo" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Descriçao</label>
+          <input type="text" class="form-control" [(ngModel)]="multa.Descricao" name="descricao" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Valores</label>
+          <input type="text" class="form-control" [(ngModel)]="multa.valores" name="valores" required>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success">Alterar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

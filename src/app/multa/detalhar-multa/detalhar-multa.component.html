@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Detalha multa</h1>
+  <dl class="list">
+    <dt>MOtivo</dt>
+    <dd>{{ multa.motivo }}</dd>
+    <dt>descriçao</dt>
+    <dd>{{ multa.Descricao }}</dd>
+    <dt>Data</dt>
+    <dd>{{ multa.valores }}</dd>
+  </dl>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <a [routerLink]="['/alterar-multa', multa._id]" class="btn btn-success">EDITAR</a>
+    <button class="btn btn-danger" type="button" (click)="deleteBook(multa._id)">EXCLUIR</button>
+  </div>
+</div>

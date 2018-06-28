@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>Lista Advertencia
+    <a [routerLink]="['/formulario-advertencia']" class="btn btn-default btn-lg">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </a>
+  </h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Motivo</th>
+        <th>Descriçao</th>
+        <th>Anexos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let advertencia of advertencias">
+        <td>{{ advertencia.motivo }}</td>
+        <td>{{ advertencia.descricao }}</td>
+        <td>{{ advertencia.anexo }}</td>
+        <td><a [routerLink]="['/detalhar-advertencia', advertencia._id]">Detalhes</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

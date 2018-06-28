@@ -1,0 +1,85 @@
+<p-messages [(value)]="msgs"></p-messages>
+<p-fieldset legend="Dados Para Consultar Enquete">
+
+    <div class="ui-g-12 ui-md-4" class="left">
+        <h3>Data Inicio</h3>
+        <p-calendar [showIcon]="true" [(ngModel)]="dataInicio" tabindex="0" [disabledDates]="invalidDates" [disabledDays]="[0,6]"
+            readonlyInput="true"></p-calendar>
+    </div>
+
+    <div class="ui-g-12 ui-md-4" class="center">
+        <h3>Data Fim</h3>
+        <p-calendar [showIcon]="true" [(ngModel)]="dataFim" tabindex="0" [disabledDates]="invalidDates" [disabledDays]="[0,6]" readonlyInput="true"></p-calendar>
+    </div>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div>
+        <button pButton type="button" label="Consultar" (click)="buscarListaEnquete()" style="float:left"></button>
+        <button pButton type="button" (click)="modalFormularioEnquete()" label="Adicionar Enquete" style="float:right" class="ui-button-warning"></button>
+    </div>
+</p-fieldset>
+<br>
+<br>
+
+<!--Dados de Resposta    *ngIf="listaEnquete.length > 0"-->
+
+<p-fieldset legend="Lista de Enquetes">
+    <p-table [value]="listaEnquete">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Data</th>
+                <th>Titulo</th>
+                <th>Assuntos</th>
+                <th></th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-enquete>
+            <tr>
+                <td>{{ enquete.data }}</td>
+                <td>{{ enquete.titulo }}</td>
+                <td>{{ enquete.assuntos }}</td>
+                <td>
+                    <button type="text" (click)="selecionarEnquete(enquete); modalDetalharEnquete();" pButton icon="pi pi-search"></button>
+                    <button type="text" (click)="selecionarEnquete(enquete);modalAlterarEnquete()" pButton icon="pi pi-refresh"></button>
+                    <button type="text" (click)="recebeIdEnquete(enquete._id);confirmaExclusaoEnquete()" pButton icon="pi pi-times"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+
+    <div *ngIf="listaEnquete.length==0">
+        Nenhum registro cadastrado
+    </div>
+
+    <!-- MODALS -->
+
+    <p-dialog header="Cadastro de Enquete" [(visible)]="formularioEnquete" [modal]="true" [responsive]="true" [width]="500" [minWidth]="600"
+        [minY]="600" [baseZIndex]="10000">
+        <formulario-enquete></formulario-enquete>
+    </p-dialog>
+
+    <p-dialog header="Detalhar Enquete" [(visible)]="detalharEnquete" [modal]="true" [responsive]="true" [width]="500" [minWidth]="600"
+        [minY]="600" [baseZIndex]="10000">
+        <detalhar-enquete [enquete]="enquete"></detalhar-enquete>
+    </p-dialog>
+
+
+    <p-dialog header="Alterar Enquete" [(visible)]="alterarEnquete" [modal]="true" [responsive]="true" [width]="500" [minWidth]="600"
+        [minY]="600" [baseZIndex]="10000">
+        <alterar-enquete [enquete]="enquete"></alterar-enquete>
+    </p-dialog>
+
+
+
+
+    <p-confirmDialog header="Exclusão de Enquete" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>

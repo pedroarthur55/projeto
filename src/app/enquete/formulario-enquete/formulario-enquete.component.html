@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form (ngSubmit)="salvarEnquete()" #enqueteForm="ngForm">
+                <p-messages [(value)]="msgs"></p-messages>
+                <div class="form-group">
+
+                    <div>
+                        <h3>Data</h3>
+                        <p-calendar [showIcon]="true" [(ngModel)]="enquete.data" name="data" required tabindex="0" [disabledDates]="invalidDates"
+                            [disabledDays]="[0,6]" readonlyInput="true"></p-calendar>
+
+                    </div>
+
+                    <h3>Titulo</h3>
+                    <span class="ui-float-label">
+                        <input id="float-input" type="text" class="form-control" [(ngModel)]="enquete.titulo" name="titulo" maxlength="40" size="60"
+                            pInputText>
+                    </span>
+                </div>
+
+
+                <div>
+                    <h3>Assuntos</h3>
+                    <textarea class="form-control" [(ngModel)]="enquete.assuntos" name="assuntos" required [rows]="5" [cols]="60" maxlength="350"
+                        pInputTextarea autoResize="autoResize"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" pButton label="Salvar" [disabled]="!enqueteForm.form.valid"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

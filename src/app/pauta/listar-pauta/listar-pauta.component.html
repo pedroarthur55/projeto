@@ -1,0 +1,89 @@
+<p-messages [(value)]="msgs"></p-messages>
+<p-fieldset legend="Dados Para Consulta Pauta">
+
+    <div class="ui-g-12 ui-md-4" class="left">
+        <h3>Data Inicio</h3>
+        <p-calendar [showIcon]="true" [(ngModel)]="dataInicio" tabindex="0" [disabledDates]="invalidDates" [disabledDays]="[0,6]" readonlyInput="true"></p-calendar>
+    </div>
+
+    <div class="ui-g-12 ui-md-4" class="center">
+        <h3>Data Fim</h3>
+        <p-calendar [showIcon]="true" [(ngModel)]="dataFim" tabindex="0" [disabledDates]="invalidDates" [disabledDays]="[0,6]" readonlyInput="true"></p-calendar>
+    </div>
+
+   
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div>
+  <button pButton type="button" label="Consultar" (click)="buscarListaPauta()" style="float:left"></button>
+  <button pButton type="button" (click)="modalFormularioPauta()"  label="Adicionar Pauta" style="float:right"  class="ui-button-warning"></button>
+</div>
+</p-fieldset>
+<br>
+<br>
+
+<!--Dados de Resposta-->
+
+<p-fieldset legend="Lista de Pauta" > 
+<p-table [value]="listaPauta" *ngIf="listaPauta.length > 0" >
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Local</th>
+            <th>Data e Hora</th>            
+            <th>Assuntos</th>
+            <th></th>            
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-pauta>
+        <tr>
+            <td>{{ pauta.local }}</td>
+            <td>{{ pauta.data }}</td>            
+            <td>{{ pauta.assuntos }}</td>             
+            <td>
+              <button type="text" (click)="selecionarPauta(pauta); modalDetalharPauta();" pButton icon="pi pi-search"></button>
+              <button type="text" (click)="selecionarPauta(pauta);modalAlterarPauta()" pButton icon="pi pi-refresh"></button>
+              <button type="text" (click)="recebeIdPauta(pauta._id);confirmaExclusaoPauta()" pButton icon="pi pi-times"></button>             
+              
+             </td>
+        </tr>
+    </ng-template>        
+    <p-paginator [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10,20,30]"></p-paginator>
+</p-table>
+
+
+<div *ngIf="listaPauta.length==0">
+    Nenhum registro cadastrado
+</div>
+
+<!-- MODALS-->
+
+<p-dialog header="Cadastro de Pauta"  [(visible)]="formularioPauta" [modal]="true" [responsive]="true" [width]="500" [minWidth]="600" [minY]="600" 
+ [baseZIndex]="10000" [closeOnEscape]="false">
+  <formulario-pauta></formulario-pauta>
+</p-dialog>
+
+
+<p-dialog header="Detalhar Pauta"  [(visible)]="detalharPauta" [modal]="true" [responsive]="true" [width]="500" [minWidth]="600" [minY]="600" 
+ [baseZIndex]="10000">
+  <detalhar-pauta [pauta]="pauta"></detalhar-pauta>
+</p-dialog>
+
+
+
+<p-dialog header="Alterar Pauta"  [(visible)]="alterarPauta" [modal]="true" [responsive]="true" [width]="500" [minWidth]="600" [minY]="600" 
+ [baseZIndex]="10000">
+  <alterar-pauta [pauta]="pauta"></alterar-pauta>
+</p-dialog>
+
+
+<p-confirmDialog header="Exclusão de Pauta" icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
+
+
+

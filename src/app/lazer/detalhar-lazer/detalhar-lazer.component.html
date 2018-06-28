@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Detalha lista</h1>
+  <dl class="list">
+    <dt>local</dt>
+    <dd>{{ lazer.Local }}</dd>
+    <dt>descriçao</dt>
+    <dd>{{ lazer.Descricao }}</dd>
+    <dt>Data</dt>
+    <dd>{{ lazer.Data }}</dd>
+  </dl>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <a [routerLink]="['/alterar-lazer', lazer._id]" class="btn btn-success">EDITAR</a>
+    <button class="btn btn-danger" type="button" (click)="deleteBook(lazer._id)">DELETAR</button>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <form (ngSubmit)="salvarComunicado()" #comunicadoForm="ngForm">
+        <p-messages [(value)]="msgs"></p-messages>
+        <div class="form-group">
+
+          <div>
+            <h3>Data</h3>
+            <p-calendar [showIcon]="true" [(ngModel)]="comunicado.data" name="data" required tabindex="0" [disabledDates]="invalidDates"
+              [disabledDays]="[0,6]" readonlyInput="true"></p-calendar>
+
+          </div>
+
+          <h3>Titulo</h3>
+          <span class="ui-float-label">
+            <input id="float-input" type="text" class="form-control" [(ngModel)]="comunicado.titulo" name="titulo" maxlength="40" size="60"
+              pInputText>
+          </span>
+        </div>
+
+
+        <div>
+          <h3>Descricao</h3>
+          <textarea class="form-control" [(ngModel)]="comunicado.descricao" name="descricao" required [rows]="5" [cols]="60" maxlength="350"
+            pInputTextarea autoResize="autoResize"></textarea>
+        </div>
+
+        <div>
+          <h3>Pauta</h3>
+          <textarea class="form-control" [(ngModel)]="comunicado.pauta" name="pauta" required [rows]="5" [cols]="60" maxlength="350"
+            pInputTextarea autoResize="autoResize"></textarea>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" pButton label="Salvar" [disabled]="!comunicadoForm.form.valid"></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

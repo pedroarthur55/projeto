@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>Edit Book</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <form (ngSubmit)="updateBook(lazer._id)" #lazerForm="ngForm">
+        <div class="form-group">
+          <label for="name">Local</label>
+          <input type="text" class="form-control" [(ngModel)]="lazer.Local" name="local" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Descriçao</label>
+          <input type="text" class="form-control" [(ngModel)]="lazer.Descricao" name="descricao" required>
+        </div>
+        <div class="form-group">
+          <label for="name">DAta</label>
+          <input type="text" class="form-control" [(ngModel)]="lazer.Data" name="data" required>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

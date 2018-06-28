@@ -1,0 +1,34 @@
+<div class="container">        
+  <div class="row">      
+      <div class="col-md-12">
+          <form  #pautaForm="ngForm">
+                  <p-messages [(value)]="msgs"></p-messages>
+              <div class="form-group">
+                  <h3>Local</h3>
+                  <span class="ui-float-label">
+                      <input id="float-input" type="text" [disabled]="true" class="form-control"
+                       [(ngModel)]="pauta.local" name="local" size="30" maxlength="40" pInputText>
+                  </span>
+              </div>              
+              
+
+              <div>
+                      <h3>Data e Hora</h3>               
+                      <p-calendar [showIcon]="true" [showTime]="true" [(ngModel)]="myDateObject"  
+                      name="data" required tabindex="0" [disabledDates]="invalidDates" 
+                      [disabledDays]="[0,6]" readonlyInput="true"></p-calendar>                        
+                      
+              </div>
+              
+              <div>
+                      <h3>Assuntos</h3>                      
+                      <textarea class="form-control" [(ngModel)]="pauta.assuntos" name="assuntos" [disabled]="true" required [rows]="5" [cols]="30" maxlength="350" pInputTextarea autoResize="autoResize"></textarea>
+              </div>
+
+            <div class="form-group">             
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    

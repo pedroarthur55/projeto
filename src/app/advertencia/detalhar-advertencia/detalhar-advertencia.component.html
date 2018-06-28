@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Detalha Advertencia</h1>
+  <dl class="list">
+    <dt>Motivo</dt>
+    <dd>{{ advertencia.motivo }}</dd>
+    <dt>Descriçao</dt>
+    <dd>{{ advertencia.descricao }}</dd>
+    <dt>Anexos</dt>
+    <dd>{{ advertencia.anexo }}</dd>
+  </dl>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <a [routerLink]="['/alterar-advertencia', advertencia._id]" class="btn btn-success">EDITAR</a>
+    <button class="btn btn-danger" type="button" (click)="deleteBook(advertencia._id)">EXCLUIR</button>
+  </div>
+</div>
