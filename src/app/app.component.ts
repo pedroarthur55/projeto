@@ -19,7 +19,7 @@ export class AppComponent {
               icon: 'fa fa-fw fa-file-o',
               items: [
 
-                {label: 'Advertencia' ,  routerLink:['formulario-advertencia']},
+                {label: 'Advertencia' ,  routerLink:['listar-advertencia']},
                 {label: 'Ata'},
                 {label: 'Comunicado', routerLink:['listar-comunicado']},
                 {label: 'Enquete', routerLink:['listar-enquete']},

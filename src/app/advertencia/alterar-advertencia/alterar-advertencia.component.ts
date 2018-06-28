@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MessageService } from 'primeng/components/common/messageservice';
+import { Message } from 'primeng/api';
 
 @Component({
   selector: 'alterar-advertencia',
@@ -9,31 +11,39 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AlterarAdvertenciaComponent implements OnInit {
 
-  advertencia: any = {};
+  @Input() advertencia;
+  msgs: Message[] = [];
+  
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute,
+     private messageService: MessageService) { }
 
   ngOnInit() {
-    this.getBook(this.route.snapshot.params['id']);
+    this.buscaAdvertenciaId(this.route.snapshot.params['id']);
   }
 
-  getBook(id) {
-    this.http.get('/advertencia/'+id).subscribe(data => {
-      this.advertencia = data;
+  buscaAdvertenciaId(id) {
+    this.http.get('/advertencia/'+id).subscribe(advertenciaId => {
+      this.advertencia = advertenciaId;
     });
   }
 
-  updateBook(id) {
+  atualizarAdvertencia(id) {
     this.advertencia.updated_date = Date.now();
     this.http.put('/advertencia/'+id, this.advertencia)
       .subscribe(res => {
           let id = res['_id'];
-          this.router.navigate(['/listar-advertencia']);
-        }, (err) => {
-          console.log(err);
+          this.mensagemSucesso();
+        }, (error) => {
+          console.log(error);
         }
       );
   }
+
+  mensagemSucesso() {
+    this.msgs = [];
+        this.msgs.push({severity:'success', summary:'Sucesso:', detail:'Atualização de Advertencia Realizado com Sucesso.'});
+}
 
 
 }

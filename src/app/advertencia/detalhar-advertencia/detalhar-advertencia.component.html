@@ -1,17 +1,39 @@
-<div class="container">
-  <h1>Detalha Advertencia</h1>
-  <dl class="list">
-    <dt>Motivo</dt>
-    <dd>{{ advertencia.motivo }}</dd>
-    <dt>Descriçao</dt>
-    <dd>{{ advertencia.descricao }}</dd>
-    <dt>Anexos</dt>
-    <dd>{{ advertencia.anexo }}</dd>
-  </dl>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <a [routerLink]="['/alterar-advertencia', advertencia._id]" class="btn btn-success">EDITAR</a>
-    <button class="btn btn-danger" type="button" (click)="deleteBook(advertencia._id)">EXCLUIR</button>
-  </div>
-</div>
+<div class="container">        
+  <div class="row">      
+      <div class="col-md-12">
+          <form  #advertenciaForm="ngForm">
+                  <p-messages [(value)]="msgs"></p-messages>
+              <div class="form-group">
+                  <h3>Motivo</h3>
+                  <span class="ui-float-label">
+                      <input id="float-input" type="text" [disabled]="true" class="form-control"
+                       [(ngModel)]="advertencia.motivo" name="motivo" size="30" maxlength="40" pInputText>
+                  </span>
+              </div>              
+              
+
+              <div>
+                <h3>Descriçao</h3>
+                <span class="ui-float-label">
+                    <input id="float-input" type="text" [disabled]="true" class="form-control"
+                     [(ngModel)]="advertencia.descricao" name="descricao" size="30" maxlength="40" pInputText>
+                </span>                     
+                      
+              </div>
+              
+              <div>
+                <h3>Anexo</h3>
+                <span class="ui-float-label">
+                    <input id="float-input" type="text" [disabled]="true" class="form-control"
+                     [(ngModel)]="advertencia.anexo" name="anexo" size="30" maxlength="40" pInputText>
+                </span>       
+             </div>
+
+            <div class="form-group">             
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    
